@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Container = styled.main`
     display: grid;
-    grid-template-columns: 0.2fr 1.8fr;
+    grid-template-columns: 0.3fr 1.7fr;
 `
 
 export const Options = styled.nav`
@@ -92,4 +92,5 @@ export const PixelArt = styled.div<IPixelArt>`
     display: grid;
     grid-template-columns: repeat(${props => props.rowsAndCollums}, 0.0001fr);
     grid-template-rows: repeat(${props => props.rowsAndCollums}, 0.0001fr);
+    width: fit-content;
 `
