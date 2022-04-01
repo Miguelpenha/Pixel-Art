@@ -15,6 +15,23 @@ export const Options = styled.nav`
     justify-content: space-evenly;
 `
 
+export const InputName = styled.input`
+    width: 90%;
+    padding: 0.5%;
+    color: #4E7AC7;
+    font-size: 1vw;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 3px solid #4E7AC7;
+
+    :focus {
+        outline: none;
+        color: #7FB2F0;
+        border-color: #7FB2F0;
+        border-radius: 10px;
+    }
+`
+
 export const InputPixelsCount = styled.input`
     width: 50%;
     padding: 0.5%;
@@ -72,8 +89,26 @@ export const ButtonReset = styled.button`
     }
 `
 
+export const ButtonDownload = styled.a`
+    width: 40%;
+    padding: 2%;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: transparent;
+
+    svg {
+        fill: #4E7AC7
+    }
+
+    :hover {
+        background-color: #d3d3d3;
+    }
+`
+
 export const InputColor = styled.input`
     width: 40%;
+    cursor: pointer;
     
     ::-webkit-color-swatch {
         border: 3px solid #4E7AC7;
@@ -81,6 +116,69 @@ export const InputColor = styled.input`
 
     ::-webkit-color-swatch-wrapper {
         padding: 0;
+    }
+`
+
+export const ButtonExport = styled.button`
+    padding: 3%;
+    color: #4E7AC7;
+    cursor: pointer;
+    font-size: 1.2vw;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid #4E7AC7;
+    background-color: #ffffff;
+
+    :hover {
+        color: #7FB2F0;
+        border-color: #7FB2F0;
+        background-color: #d3d3d3;
+    }
+`
+
+export const FormImport = styled.form`
+    padding: 4%;
+    margin-top: 5%;
+    border-radius: 5px;
+    border: 2px solid #4E7AC7;
+`
+
+export const InputImport = styled.input`
+    width: 90%;
+    margin: auto;
+    padding: 0.5%;
+    margin-top: 5%;
+    display: block;
+    color: #4E7AC7;
+    font-size: 1vw;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 3px solid #4E7AC7;
+    
+    :focus {
+        outline: none;
+        color: #7FB2F0;
+        border-color: #7FB2F0;
+        border-radius: 10px;
+    }
+`
+
+export const ButtonImport = styled.button`
+    padding: 3%;
+    color: #4E7AC7;
+    margin-top: 10%;
+    cursor: pointer;
+    font-size: 1.2vw;
+    margin-bottom: 5%;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid #4E7AC7;
+    background-color: #ffffff;
+
+    :hover {
+        color: #7FB2F0;
+        border-color: #7FB2F0;
+        background-color: #d3d3d3;
     }
 `
 
@@ -93,4 +191,5 @@ export const PixelArt = styled.div<IPixelArt>`
     grid-template-columns: repeat(${props => props.rowsAndCollums}, 0.0001fr);
     grid-template-rows: repeat(${props => props.rowsAndCollums}, 0.0001fr);
     width: fit-content;
+    height: fit-content;
 `

@@ -1,9 +1,9 @@
 import { v4 } from 'uuid'
 import { Ipixel } from '../types'
 import Head from 'next/head'
-import { Container, Options, InputPixelsCount, ButtonEraser, ButtonReset, InputColor, PixelArt } from '../styles/pages'
+import { Container, Options, InputName, InputPixelsCount, ButtonEraser, ButtonReset, ButtonDownload, InputColor, ButtonExport, FormImport, InputImport, ButtonImport, PixelArt } from '../styles/pages'
 import Pixel from '../components/pages/Pixel'
-import { useEffect, useState, useRef, FormEventHandler, FormEvent, InputHTMLAttributes } from 'react'
+import { useEffect, useState, useRef, FormEvent } from 'react'
 import html2canvas from 'html2canvas'
 
 export default function Home() {
@@ -15,6 +15,8 @@ export default function Home() {
     const ButtonResetRef = useRef<HTMLButtonElement>(null)
     const PixelArtRef = useRef<HTMLDivElement>(null)
     const IconButtonResetRef = useRef<SVGSVGElement>(null)
+    const ButtonDownloadRef = useRef<HTMLAnchorElement>(null)
+    const IconButtonDownloadRef = useRef<SVGSVGElement>(null)
     const [name, setName] = useState('Design sem nome')
     const [urlDownload, setUrlDownload] = useState<string>()
 
@@ -74,6 +76,8 @@ export default function Home() {
         setPixelsCont(importValue.pixelsCont)
         setSizePixel(importValue.sizePixel)
         setPixels(importValue.pixels)
+        
+        input.value = ''
 
         ev.preventDefault()
     }
@@ -85,7 +89,7 @@ export default function Home() {
             </Head>
             <Container>
                 <Options>
-                    <input type="text" name="name" value={name} onChange={ev => setName(ev.target.value)}/>
+                    <InputName type="text" name="name" value={name} onChange={ev => setName(ev.target.value)}/>
                     <ButtonReset title="Resetar" ref={ButtonResetRef} onClick={() => {
                         setPixels(makePixels())
 
@@ -132,22 +136,43 @@ export default function Home() {
                         </svg>
                     </ButtonEraser>
                     <InputColor type="color" value={color} onChange={ev => setColor(ev.target.value)} title="Escolher uma cor"/>
+                    {urlDownload && (
+                        <ButtonDownload ref={ButtonDownloadRef} title="Baixar imagem" href={urlDownload} download={name} onClick={() => {
+                            if (ButtonDownloadRef.current && IconButtonDownloadRef.current) {
+                                ButtonDownloadRef.current.style.padding = '6%'
+                                IconButtonDownloadRef.current.style.fill = '#7FB2F0'
+                                
+                                setTimeout(() => {
+                                    if (ButtonDownloadRef.current && IconButtonDownloadRef.current) {
+                                        ButtonDownloadRef.current.style.padding = '2%'
+                                        IconButtonDownloadRef.current.style.fill = '#4E7AC7'
+                                    }
+                                }, 300)
+                            }
+                        }}>
+                            <svg ref={IconButtonDownloadRef} xmlns="http://www.w3.org/2000/svg" enableBackground="new 0 0 24 24" viewBox="0 0 24 24">
+                                <g>
+                                    <rect fill="none" height="24" width="24"/>
+                                </g>
+                                <g>
+                                    <path d="M18,15v3H6v-3H4v3c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-3H18z M17,11l-1.41-1.41L13,12.17V4h-2v8.17L8.41,9.59L7,11l5,5 L17,11z"/>
+                                </g>
+                            </svg>
+                        </ButtonDownload>
+                    )}
+                    <ButtonExport title="Exportar pixels" onClick={() => {
+                        navigator.clipboard.writeText(exportJSON())
+                    }}>Exportar pixels</ButtonExport>
+                    <FormImport onSubmit={importJSON}>
+                        <InputImport type="text"/>
+                        <ButtonImport title="Importar pixels">Importar pixels</ButtonImport>
+                    </FormImport>
                 </Options>
                 <PixelArt ref={PixelArtRef} rowsAndCollums={Math.sqrt(pixelsCont)}>
                     {pixels && pixels.map(pixel => (
                         <Pixel pixels={pixels} setPixels={setPixels} size={sizePixel} key={pixel.id} id={pixel.id} color={eraser ? '#cccccc' :color}/>
                     ))}
                 </PixelArt>
-                {urlDownload && (
-                    <a href={urlDownload} download={name}>Baixar imagem</a>
-                )}
-                <button onClick={() => {
-                    navigator.clipboard.writeText(exportJSON())
-                }} style={{width: '10%'}}>Exportar pixels</button>
-                <form onSubmit={importJSON}>
-                    <input type="text"/>
-                    <button>Importar</button>
-                </form>
             </Container>
         </>
     )
