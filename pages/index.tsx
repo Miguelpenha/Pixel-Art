@@ -5,6 +5,7 @@ import { Container, Options, InputName, InputPixelsCount, ButtonEraser, ButtonRe
 import Pixel from '../components/pages/Pixel'
 import { useEffect, useState, useRef, FormEvent } from 'react'
 import html2canvas from 'html2canvas'
+import { sign } from 'jsonwebtoken'
 
 export default function Home() {
     const [color, setColor] = useState('#FF0000')
@@ -48,12 +49,15 @@ export default function Home() {
     }, [pixels])
 
     function exportJSON() {
-        console.log(pixels)
+        const newsPixels: Array<string | boolean> = []
+
+        pixels.map(pixel => pixel.color != '#cccccc' ? newsPixels.push(pixel.color) : newsPixels.push(false))
+        
         return JSON.stringify({
             name,
             pixelsCont,
             sizePixel,
-            pixels
+            pixels: newsPixels
         })
     }
 
@@ -76,9 +80,18 @@ export default function Home() {
         setName(String(importValue.name))
         setPixelsCont(importValue.pixelsCont)
         setSizePixel(importValue.sizePixel)
-        console.log(importValue.pixels)
         input.value = ''
-        setTimeout(() => setPixels(importValue.pixels), 1);
+        setTimeout(() => {
+            const newsPixels: Ipixel[] = []
+
+            importValue.pixels.map(pixel => 
+                newsPixels.push({
+                    id: v4(),
+                    color: pixel ? String(pixel) : '#cccccc'
+                })
+            )
+            setPixels(newsPixels)
+        }, 1);
 
         ev.preventDefault()
     }
