@@ -8,27 +8,19 @@ interface Iprops {
     size: number
     pixels: Ipixel[]
     setPixels: Dispatch<SetStateAction<Ipixel[]>>
+    pixelColor: string
 }
 
-const Pixel: FC<Iprops> = ({ id, color, size, pixels, setPixels }) => {
-    const [pixel, setPixel] = useState<Ipixel>({
-        id,
-        color: '#cccccc'
-    })
-
-    return <Container size={size} color={pixel.color} onClick={() => {
-        setPixel(pixel => {
-            return {
-                ...pixel,
-                color
-            }
-        })
-
+const Pixel: FC<Iprops> = ({ id, color, size, pixels, setPixels, pixelColor }) => {
+    return <Container size={size} color={pixelColor} onClick={() => {
         const pixelsBrutos: Ipixel[] = []
 
         pixels.map(pixelBruto => {
-            if (pixelBruto.id === pixel.id) {
-                pixelsBrutos.push(pixel)
+            if (pixelBruto.id === id) {
+                pixelsBrutos.push({
+                    id,
+                    color
+                })
             } else {
                 pixelsBrutos.push(pixelBruto)
             }

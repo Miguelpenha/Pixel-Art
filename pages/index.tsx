@@ -48,6 +48,7 @@ export default function Home() {
     }, [pixels])
 
     function exportJSON() {
+        console.log(pixels)
         return JSON.stringify({
             name,
             pixelsCont,
@@ -75,9 +76,9 @@ export default function Home() {
         setName(String(importValue.name))
         setPixelsCont(importValue.pixelsCont)
         setSizePixel(importValue.sizePixel)
-        setPixels(importValue.pixels)
-        
+        console.log(importValue.pixels)
         input.value = ''
+        setTimeout(() => setPixels(importValue.pixels), 1);
 
         ev.preventDefault()
     }
@@ -170,7 +171,7 @@ export default function Home() {
                 </Options>
                 <PixelArt ref={PixelArtRef} rowsAndCollums={Math.sqrt(pixelsCont)}>
                     {pixels && pixels.map(pixel => (
-                        <Pixel pixels={pixels} setPixels={setPixels} size={sizePixel} key={pixel.id} id={pixel.id} color={eraser ? '#cccccc' :color}/>
+                        <Pixel pixels={pixels} setPixels={setPixels} size={sizePixel} key={pixel.id} id={pixel.id} color={eraser ? '#cccccc' : color} pixelColor={pixel.color}/>
                     ))}
                 </PixelArt>
             </Container>
