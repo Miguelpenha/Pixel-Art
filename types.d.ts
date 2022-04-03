@@ -9,4 +9,5 @@ export interface Iart {
     pixelsCont: number
     sizePixel: number
     pixels: Ipixel[]
+    url: string
 }

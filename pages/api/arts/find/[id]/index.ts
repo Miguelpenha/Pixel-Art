@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import artsModels from '../../../../models/art'
-import connectDB from '../../../../services/connectDB'
+import artsModels from '../../../../../models/art'
+import connectDB from '../../../../../services/connectDB'
 import { isValidObjectId } from 'mongoose'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {

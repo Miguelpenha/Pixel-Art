@@ -62,7 +62,8 @@ export default function Home() {
             name,
             pixelsCont,
             sizePixel,
-            pixels
+            pixels,
+            url: urlDownload
         } as Iart)).data
 
         return art._id
