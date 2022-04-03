@@ -1,11 +1,11 @@
 import { v4 } from 'uuid'
-import { Ipixel } from '../types'
+import { Iart, Ipixel } from '../types'
 import Head from 'next/head'
 import { Container, Options, InputName, InputPixelsCount, ButtonEraser, ButtonReset, ButtonDownload, InputColor, ButtonExport, FormImport, InputImport, ButtonImport, PixelArt } from '../styles/pages'
 import Pixel from '../components/pages/Pixel'
 import { useEffect, useState, useRef, FormEvent } from 'react'
 import html2canvas from 'html2canvas'
-import { sign } from 'jsonwebtoken'
+import axios from 'axios'
 
 export default function Home() {
     const [color, setColor] = useState('#FF0000')
@@ -48,52 +48,59 @@ export default function Home() {
         print().then()
     }, [pixels])
 
-    function exportJSON() {
-        const newsPixels: Array<string | boolean> = []
-
-        pixels.map(pixel => pixel.color != '#cccccc' ? newsPixels.push(pixel.color) : newsPixels.push(false))
-        
+    function exportJSON() {     
         return JSON.stringify({
             name,
             pixelsCont,
             sizePixel,
-            pixels: newsPixels
+            pixels
         })
     }
 
-    interface IimportJson {
-        name: String
-        pixelsCont: number
-        sizePixel: number
-        pixels: Ipixel[]
+    async function exportModel() {
+        const art = (await axios.post<Iart>('/api/arts/create', {
+            name,
+            pixelsCont,
+            sizePixel,
+            pixels
+        } as Iart)).data
+
+        return art._id
     }
 
     function importJSON(ev: FormEvent<HTMLFormElement>) {
+        ev.preventDefault()
+
         interface Iinput extends Element {
             value?: string
         }
 
         const input: Iinput = ev.currentTarget[0]
 
-        const importValue: IimportJson = JSON.parse(String(input.value))
+        const importValue: Iart = JSON.parse(String(input.value))
 
         setName(String(importValue.name))
         setPixelsCont(importValue.pixelsCont)
         setSizePixel(importValue.sizePixel)
         input.value = ''
-        setTimeout(() => {
-            const newsPixels: Ipixel[] = []
+        setTimeout(() => setPixels(importValue.pixels), 1)
+    }
 
-            importValue.pixels.map(pixel => 
-                newsPixels.push({
-                    id: v4(),
-                    color: pixel ? String(pixel) : '#cccccc'
-                })
-            )
-            setPixels(newsPixels)
-        }, 1);
-
+    async function importModel(ev: FormEvent<HTMLFormElement>) {
         ev.preventDefault()
+
+        interface Iinput extends Element {
+            value?: string
+        }
+        
+        const input: Iinput = ev.currentTarget[0]        
+        const art: Iart = (await axios.get(`/api/arts/find/${input.value}`)).data
+        
+        setName(String(art.name))
+        setPixelsCont(art.pixelsCont)
+        setSizePixel(art.sizePixel)
+        input.value = ''
+        setTimeout(() => setPixels(art.pixels), 1)
     }
 
     return (
@@ -174,12 +181,19 @@ export default function Home() {
                             </svg>
                         </ButtonDownload>
                     )}
-                    <ButtonExport title="Exportar pixels" onClick={() => {
+                    <ButtonExport title="Exportar pixels em JSON" onClick={() => (
                         navigator.clipboard.writeText(exportJSON())
-                    }}>Exportar pixels</ButtonExport>
+                    )}>Exportar pixels em JSON</ButtonExport>
+                    <ButtonExport title="Exportar pixels por modelo" onClick={async () => (
+                        navigator.clipboard.writeText(await exportModel())
+                    )}>Exportar pixels por modelo</ButtonExport>
                     <FormImport onSubmit={importJSON}>
                         <InputImport type="text"/>
-                        <ButtonImport title="Importar pixels">Importar pixels</ButtonImport>
+                        <ButtonImport title="Importar pixels por JSON">Importar pixels por JSON</ButtonImport>
+                    </FormImport>
+                    <FormImport onSubmit={importModel}>
+                        <InputImport type="text"/>
+                        <ButtonImport title="Importar pixels por modelo">Importar pixels por model</ButtonImport>
                     </FormImport>
                 </Options>
                 <PixelArt ref={PixelArtRef} rowsAndCollums={Math.sqrt(pixelsCont)}>
