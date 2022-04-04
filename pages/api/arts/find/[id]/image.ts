@@ -17,6 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 const chunks = Buffer.from(art.url.replace('data:image/png;base64,', ''), 'base64')
                 
                 res.setHeader('content-type', 'image/png')
+                res.setHeader('content-length', Buffer.byteLength(chunks))
 
                 res.end(chunks)
             } else {
