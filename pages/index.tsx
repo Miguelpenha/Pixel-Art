@@ -23,7 +23,7 @@ export default function Home() {
                     </ContainerIconAdd>
                 </Link>
                 <Arts>
-                    {arts?.map(art => <Art art={art}/>)}
+                    {arts?.map((art, index) => <Art key={index} art={art}/>)}
                 </Arts>
             </Container>
         </>

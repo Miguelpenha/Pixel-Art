@@ -11,23 +11,9 @@ export const Header = styled.header`
     padding: 2%;
     display: flex;
     cursor: pointer;
+    border: 2px solid #e5e5e5;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-
-    span {
-        :after {
-            left: 0;
-            bottom: 0;
-            content: '';
-            width: 100%;
-            height: 3px;
-            position: absolute;
-            transform: scaleX(0);
-            background-color: #999999;
-            transform-origin: bottom right;
-            transition: transform 0.35s ease-out;
-        }
-    }
 
     :hover {
         background-color: #e5e5e5;
@@ -48,6 +34,19 @@ export const Title = styled.span`
     color: #999999;
     font-size: 1.8vw;
     position: relative;
+
+    :after {
+        left: 0;
+        bottom: 0;
+        content: '';
+        width: 100%;
+        height: 3px;
+        position: absolute;
+        transform: scaleX(0);
+        background-color: #999999;
+        transform-origin: bottom right;
+        transition: transform 0.35s ease-out;
+    }
 `
 
 export const IconCopy = styled.svg`
@@ -73,6 +72,7 @@ export const Image = styled.img`
 export const Footer = styled.footer`
     display: flex;
     margin-top: 2%;
+    padding: 0% 2%;
     overflow: hidden;
 `
 
@@ -123,6 +123,7 @@ export const ContainerIconMore = styled.button`
     border: none;
     cursor: pointer;
     overflow: hidden;
+    margin-left: auto;
     border-radius: 50%;
     background-color: transparent;
     

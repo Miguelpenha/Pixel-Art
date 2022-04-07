@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Miguelpenha/sobre-cobre#readme",
   "dependencies": {
     "axios": "^0.26.1",
+    "get-image-colors": "^4.0.1",
     "html2canvas": "^1.4.1",
     "mongoose": "^6.2.9",
     "next": "^12.1.0",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/get-image-colors": "^4.0.1",
     "@types/html2canvas": "^1.0.0",
     "@types/mongoose": "^5.11.97",
     "@types/next": "^9.0.0",
