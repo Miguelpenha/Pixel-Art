@@ -10,4 +10,5 @@ export interface Iart {
     sizePixel: number
     pixels: Ipixel[]
     url: string
+    colors: string[]
 }

@@ -14,7 +14,7 @@ const Art: FC<Iprops> = ({ art }) => {
 
     return (
         <Container>
-            <Header onClick={() => navigator.clipboard.writeText(art.name)}>
+            <Header colors={art.colors} onClick={() => navigator.clipboard.writeText(art.name)}>
                 <Title>{art.name}</Title>
                 <IconCopy xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M0 0h24v24H0V0z" fill="none"/>

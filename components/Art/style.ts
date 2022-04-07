@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
     width: 90%;
@@ -7,11 +7,14 @@ export const Container = styled.div`
     flex-direction: column;
 `
 
-export const Header = styled.header`
+interface IHeader {
+    colors: string[]
+}
+
+export const Header = styled.header<IHeader>`
     padding: 2%;
     display: flex;
     cursor: pointer;
-    border: 2px solid #e5e5e5;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 
@@ -27,12 +30,31 @@ export const Header = styled.header`
             transform-origin: bottom left;
         }
     }
+
+    span {
+        ${props => {
+            let colorsNews = ''
+
+            props.colors.map((color, index) => {
+                colorsNews += `${color}${index === props.colors.length-1 ? '' : ', '}`
+            })
+            console.log(colorsNews)
+            
+            return css`
+                background: -webkit-linear-gradient(60deg, ${colorsNews});
+            `
+        }}
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 `
 
 export const Title = styled.span`
     margin: auto;
     color: #999999;
     font-size: 1.8vw;
+    font-weight: bold;
     position: relative;
 
     :after {

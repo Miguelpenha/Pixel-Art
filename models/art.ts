@@ -6,6 +6,10 @@ const schema = new mongoose.Schema<Iart>({
     pixelsCont: Number,
     sizePixel: Number,
     url: String,
+    colors: {
+        type: [String],
+        default: undefined
+    },
     pixels: [{
         id: String,
         color: String
