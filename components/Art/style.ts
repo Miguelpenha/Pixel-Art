@@ -65,7 +65,7 @@ export const Image = styled.img`
     height: 100%;
 
     :hover {
-        transform: scale(1.06);
+        transform: scale(1.1);
         filter: brightness(75%);
     }
 `
@@ -127,11 +127,11 @@ export const ContainerIconMore = styled.button`
     background-color: transparent;
     
     :hover {
-        animation: teste 1s;
+        animation: swing 1s;
         background-color: #e5e5e5;
     }
 
-    @keyframes teste {
+    @keyframes swing {
         0% {
             border-radius: 50%;
             transform: translate(0px) rotate(0deg);

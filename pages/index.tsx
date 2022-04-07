@@ -3,7 +3,7 @@ import { Iart } from '../types'
 import Head from 'next/head'
 import { Container, ContainerIconAdd, IconAdd, Arts } from '../styles/pages'
 import Link from 'next/link'
-import Art from '../components/pages/Home/Art'
+import Art from '../components/Art'
 
 export default function Home() {
     const { data: arts } = api<Iart[]>('/api/arts/find')
