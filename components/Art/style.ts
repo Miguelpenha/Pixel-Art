@@ -15,6 +15,8 @@ export const Header = styled.header<IHeader>`
     padding: 2%;
     display: flex;
     cursor: pointer;
+    border: 2px solid #e5e5e5;
+    border-bottom: none;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 
@@ -93,9 +95,13 @@ export const Image = styled.img`
 
 export const Footer = styled.footer`
     display: flex;
-    margin-top: 2%;
     padding: 0% 2%;
+    padding-top: 1%;
     overflow: hidden;
+    border: 2px solid #e5e5e5;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 `
 
 export const ContainerIconLike = styled.button`
