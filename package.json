@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/Miguelpenha/sobre-cobre#readme",
   "dependencies": {
+    "@radix-ui/react-dialog": "^0.1.7",
+    "@radix-ui/react-dropdown-menu": "^0.1.6",
     "axios": "^0.26.1",
     "get-image-colors": "^4.0.1",
     "html2canvas": "^1.4.1",
