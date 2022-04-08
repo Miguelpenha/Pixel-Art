@@ -95,11 +95,14 @@ export const Image = styled.img`
 
 export const Footer = styled.footer`
     display: flex;
-    padding: 0% 2%;
-    padding-top: 1%;
+    padding: 2% 2%;
     overflow: hidden;
-    border: 2px solid #e5e5e5;
     border-top: none;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    border: 2px solid #e5e5e5;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
 `
@@ -109,7 +112,6 @@ export const ContainerIconLike = styled.button`
     border: none;
     cursor: pointer;
     overflow: hidden;
-    position: relative;
     background-color: transparent;
 `
 
@@ -130,7 +132,6 @@ export const ContainerIconMark = styled.button`
     border: none;
     cursor: pointer;
     overflow: hidden;
-    position: relative;
     background-color: transparent;
 `
 
