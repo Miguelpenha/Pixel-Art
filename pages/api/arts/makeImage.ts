@@ -3,12 +3,15 @@ import { Iart } from '../../../types'
 import Handlebars from 'handlebars'
 import path from 'path'
 import fs from 'fs'
-import puppeteer from 'puppeteer'
+import chromium from 'chrome-aws-lambda'
 const html2canvas = require('html2canvas')
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') { 
-        const browser = await puppeteer.launch()
+        const browser = await chromium.puppeteer.launch({
+            executablePath: await chromium.executablePath
+        })
+        //const browser = await puppeteer.launch()
         const page = await browser.newPage()
         await page.addScriptTag({url: 'https://html2canvas.hertzen.com/dist/html2canvas.js'})
         await page.setRequestInterception(true)
@@ -25,7 +28,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         }))
 
         const urlImageArt = await page.evaluate(async () => {
-            const canvas = await html2canvas(document.getElementById('art'))
+            const canvas = await html2canvas(document.getElementById('art') as HTMLElement)
             
             return canvas.toDataURL('image/png')
         })
