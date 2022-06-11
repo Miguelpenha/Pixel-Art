@@ -14,26 +14,9 @@
             border: 1px solid #929292;
         }
     </style>
-    <script src="../../html2canvas.min.js"></script>
 </head>
 <div id="art">
     {{#each pixels}}
         <div class="pixel" style="background-color: {{this.color}};"></div>
     {{/each}}
 </div>
-
-<form action="?download" id="form" method="POST">
-    <input type="hidden" name="download" id="download">
-</form>
-
-<script>
-    html2canvas(document.getElementById('art')).then(res => {
-        const dataImage = res.toDataURL('image/png')
-        const form = window.document.getElementById('form')
-        const formValueImage = window.document.getElementById('download')
-
-        formValueImage.value = dataImage
-        
-        form.submit()
-    })
-</script>
