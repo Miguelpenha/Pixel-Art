@@ -9,8 +9,11 @@ const html2canvas = require('html2canvas')
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') { 
         const browser = await chromium.puppeteer.launch({
+            args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+            defaultViewport: chromium.defaultViewport,
             executablePath: await chromium.executablePath,
-            args: ['--no-sandbox']
+            headless: true,
+            ignoreHTTPSErrors: true
         })
         //const browser = await puppeteer.launch()
         const page = await browser.newPage()
