@@ -23,6 +23,7 @@
     "@radix-ui/react-dropdown-menu": "^0.1.6",
     "axios": "^0.26.1",
     "get-image-colors": "^4.0.1",
+    "handlebars": "^4.7.7",
     "html2canvas": "^1.4.1",
     "mongoose": "^6.2.9",
     "next": "^12.1.0",

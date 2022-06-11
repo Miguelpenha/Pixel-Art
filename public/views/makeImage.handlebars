@@ -1,0 +1,39 @@
+<head>
+    <style>
+        #art {
+            display: grid;
+            width: fit-content;
+            height: fit-content;
+            grid-template-rows: repeat({{sizeArt}}, 0.0001fr);
+            grid-template-columns: repeat({{sizeArt}}, 0.0001fr);
+        }
+
+        .pixel {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #929292;
+        }
+    </style>
+    <script src="../../html2canvas.min.js"></script>
+</head>
+<div id="art">
+    {{#each pixels}}
+        <div class="pixel" style="background-color: {{this.color}};"></div>
+    {{/each}}
+</div>
+
+<form action="?download" id="form" method="POST">
+    <input type="hidden" name="download" id="download">
+</form>
+
+<script>
+    html2canvas(document.getElementById('art')).then(res => {
+        const dataImage = res.toDataURL('image/png')
+        const form = window.document.getElementById('form')
+        const formValueImage = window.document.getElementById('download')
+
+        formValueImage.value = dataImage
+        
+        form.submit()
+    })
+</script>
