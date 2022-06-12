@@ -9,13 +9,28 @@ const html2canvas = require('html2canvas')
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') { 
-        const browser = await chromium.puppeteer.launch({
-            args: [...chromium.args, ...argsPuppeteer],
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath,
-            headless: true,
-            ignoreHTTPSErrors: true
-        })
+        const executablePath = await chromium.executablePath
+
+        let browser = null
+
+        if (!executablePath) {
+            const puppeteer = require('puppeteer')
+
+            browser = await puppeteer.launch({
+                args: [...chromium.args, ...argsPuppeteer],
+                defaultViewport: chromium.defaultViewport,
+                headless: true,
+                ignoreHTTPSErrors: true
+            })
+        } else {
+            browser = await chromium.puppeteer.launch({
+                args: [...chromium.args, ...argsPuppeteer],
+                defaultViewport: chromium.defaultViewport,
+                executablePath,
+                headless: true,
+                ignoreHTTPSErrors: true
+            })
+        }
 
         const page = await browser.newPage()
         await page.addScriptTag({url: 'https://html2canvas.hertzen.com/dist/html2canvas.js'})
