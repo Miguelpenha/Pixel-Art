@@ -4,21 +4,21 @@ import Handlebars from 'handlebars'
 import path from 'path'
 import fs from 'fs'
 import chromium from 'chrome-aws-lambda'
+import argsPuppeteer from '../../../argsPuppeteer'
 const html2canvas = require('html2canvas')
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') { 
         const browser = await chromium.puppeteer.launch({
-            args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+            args: [...chromium.args, ...argsPuppeteer],
             defaultViewport: chromium.defaultViewport,
             executablePath: await chromium.executablePath,
             headless: true,
             ignoreHTTPSErrors: true
         })
-        //const browser = await puppeteer.launch()
+
         const page = await browser.newPage()
         await page.addScriptTag({url: 'https://html2canvas.hertzen.com/dist/html2canvas.js'})
-        await page.setRequestInterception(true)
         const { pixels, pixelsCont } = req.body as Iart
 
         const template = Handlebars.compile<{
@@ -29,13 +29,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         await page.setContent(template({
             pixels,
             sizeArt: Math.sqrt(pixelsCont)
-        }))
+        }), {
+            waitUntil: 'load'
+        })
 
         const urlImageArt = await page.evaluate(async () => {
             const canvas = await html2canvas(document.getElementById('art') as HTMLElement)
             
             return canvas.toDataURL('image/png')
         })
+
+        await browser.close()
 
         res.json({download: urlImageArt})
     } else {
