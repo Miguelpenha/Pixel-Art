@@ -1,6 +1,5 @@
 import { Iart } from '../../types'
-import { FC, memo } from 'react'
-import { useState } from 'react'
+import { FC, useState, memo } from 'react'
 import { Container, Header, Title, IconCopy, ContainerImage, Image, Footer, ContainerIconLike, IconLike, ContainerIconMark, IconMark , ContainerIconMore, IconMore } from './style'
 import Link from 'next/link'
 
