@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import api from '../../api'
+import api from '../../services/api'
 import { Iart } from '../../types'
 import { useState } from 'react'
 import Head from 'next/head'
@@ -17,6 +17,7 @@ function Art() {
     return (
         <>
             <Head>
+                <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
                 <title>{art?.name}</title>
             </Head>
             <Container>

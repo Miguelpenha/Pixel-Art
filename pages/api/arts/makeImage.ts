@@ -39,7 +39,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         const template = Handlebars.compile<{
             pixels: Iart['pixels'],
             sizeArt: number
-        }>(fs.readFileSync(path.resolve(process.cwd(), 'public', 'views', 'makeImage.handlebars')).toString('utf-8'))
+        }>(fs.readFileSync(path.resolve(process.cwd(), 'views', 'makeImage.handlebars')).toString('utf-8'))
 
         await page.setContent(template({
             pixels,

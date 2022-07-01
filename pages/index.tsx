@@ -1,4 +1,4 @@
-import api from '../api'
+import api from '../services/api'
 import { Iart } from '../types'
 import Head from 'next/head'
 import { Container, ContainerIconAdd, IconAdd, Arts } from '../styles/pages'
@@ -12,6 +12,7 @@ export default function Home() {
     return (
         <>
             <Head>
+                <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
                 <title>Pixels Arts</title>
             </Head>
             <DropdownMenu.Root>

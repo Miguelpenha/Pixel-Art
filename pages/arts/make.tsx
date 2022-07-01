@@ -107,6 +107,7 @@ export default function Make() {
     return (
         <>
             <Head>
+                <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
                 <title>Make Pixel Art</title>
             </Head>
             <Container>
