@@ -28,7 +28,7 @@ export const ContainerIconOpen = styled.a`
     cursor: pointer;
     position: absolute;
     border-radius: 50%;
-
+    
     :hover {
         background-color: #ffffff47;
     }

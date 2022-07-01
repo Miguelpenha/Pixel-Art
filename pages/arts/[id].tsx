@@ -22,22 +22,24 @@ function Art() {
             </Head>
             <Container>
                 <Title>{art?.name}</Title>
-                <ContainerArtImage onClick={event => {
+                <ContainerArtImage title="Dar Zoom" onClick={event => {
                     event.stopPropagation()
                     event.cancelable = true
 
                     setModalImageOpen(true)
                 }}>
-                    <Link href={`/api/arts/find/${art?._id}/image`} passHref>
-                        <ContainerIconOpen target="_blank" onClick={event => {
-                            event.stopPropagation()
-                            event.cancelable = true
-                        }}>
-                            <IconOpen xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-                                <path d="M9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H22.95V9H9Q9 9 9 9Q9 9 9 9V39Q9 39 9 39Q9 39 9 39H39Q39 39 39 39Q39 39 39 39V25.05H42V39Q42 40.2 41.1 41.1Q40.2 42 39 42ZM19.1 31.05 17 28.9 36.9 9H25.95V6H42V22.05H39V11.15Z"/>
-                            </IconOpen>
-                        </ContainerIconOpen>
-                    </Link>
+                    {!modalImageOpen && (
+                        <Link href={`/api/arts/find/${art?._id}/image`} passHref>
+                            <ContainerIconOpen title="Abrir imagem" target="_blank" onClick={event => {
+                                event.stopPropagation()
+                                event.cancelable = true
+                            }}>
+                                <IconOpen xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                    <path d="M9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H22.95V9H9Q9 9 9 9Q9 9 9 9V39Q9 39 9 39Q9 39 9 39H39Q39 39 39 39Q39 39 39 39V25.05H42V39Q42 40.2 41.1 41.1Q40.2 42 39 42ZM19.1 31.05 17 28.9 36.9 9H25.95V6H42V22.05H39V11.15Z"/>
+                                </IconOpen>
+                            </ContainerIconOpen>
+                        </Link>
+                    )}
                     <ArtImage src={art?.url}/>
                 </ContainerArtImage>
                 <ModalImage
@@ -45,11 +47,12 @@ function Art() {
                     isOpen={modalImageOpen}
                     onRequestClose={closeModal}
                     style={{
-                        overlay: { display: 'flex' }
+                        overlay: { display: 'flex', cursor: 'pointer', backgroundColor: 'rgba(0, 0, 0, 0.1)' }
                     }}
                 >
                     <ArtModalImage
                         src={art?.url}
+                        title={modalImageZoom ? 'Tirar Zoom' : 'Dar Zoom'}
                         onClick={() => setModalImageZoom(!modalImageZoom)}
                     />
                 </ModalImage>
