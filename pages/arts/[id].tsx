@@ -1,19 +1,14 @@
-import { useRouter } from 'next/router'
-import { get } from '../../services/api'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import axios from 'axios'
 import { Iart } from '../../types'
+import { FC } from 'react'
+import api from '../../services/api'
 import { useState } from 'react'
 import Head from 'next/head'
 import { Container, Title, ContainerArtImage, ContainerIconOpen, IconOpen, ArtImage, ModalImage, ArtModalImage } from '../../styles/pages/arts/id'
 import Link from 'next/link'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import axios from 'axios'
-import { FC } from 'react'
 
 interface Iprops {
-    id: string
-}
-
-interface Iparams {
     id: string
 }
 
@@ -33,22 +28,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async context => {
-    const { id } = context.params as unknown as Iparams
+    const { id } = context.params as unknown as Iprops
 
     return {
-        props: {
-            id
-        }
+        props: { id }
     }
 }
 
 const Art: FC<Iprops> = ({ id }) => {
-    const { data: art } = get<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
+    const { data: art } = api<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
     const [modalImageOpen, setModalImageOpen] = useState(false)
     const [modalImageZoom, setModalImageZoom] = useState(false)
 
     const closeModal = () => setModalImageOpen(false)
-
+    
     return (
         <>
             <Head>
