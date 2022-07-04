@@ -2,13 +2,13 @@ import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
     body {
-        background: #ffffff;
+        background: ${props => props.theme.backgroundColor};
     }
 
     * {
         margin: 0;
         padding: 0;
-        color: #c5c5c5;
+        color: ${props => props.theme.color};
         overflow: overlay;
         text-align: center;
         scrollbar-width: thin;
@@ -17,7 +17,7 @@ export default createGlobalStyle`
         transition-duration: 0.2s;
         font-family: 'Roboto', sans-serif;
         transition-timing-function: linear;
-        scrollbar-color: #FFFFFF rgba(0, 0, 0, 0.4);
+        scrollbar-color: ${props => props.theme.secondary} rgba(0, 0, 0, 0.4);
         
         ::-webkit-scrollbar {
             width: 12px;
@@ -29,7 +29,7 @@ export default createGlobalStyle`
 
         ::-webkit-scrollbar-thumb {
             border-radius: 16px;
-            background-color: #FFFFFF;
+            background-color: ${props => props.theme.backgroundColor};
         }
     }
 

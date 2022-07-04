@@ -1,3 +1,11 @@
+export interface Itheme {
+    color: string
+    primary: string
+    secondary: string
+    backgroundColor: string
+    backgroundColorSecondary: string
+}
+
 export interface Ipixel {
     id: string
     color: string

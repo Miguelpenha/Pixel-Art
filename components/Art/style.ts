@@ -15,16 +15,16 @@ export const Header = styled.header<IHeader>`
     padding: 2%;
     display: flex;
     cursor: pointer;
-    border: 2px solid #e5e5e5;
     border-bottom: none;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    border: 2px solid ${props => props.theme.secondary};
 
     :hover {
-        background-color: #e5e5e5;
+        background-color: ${props => props.theme.secondary};
 
         svg {
-            fill: #999999;
+            fill: ${props => props.theme.color};
         }
 
         span:after {
@@ -53,10 +53,10 @@ export const Header = styled.header<IHeader>`
 
 export const Title = styled.span`
     margin: auto;
-    color: #999999;
     font-size: 1.8vw;
     font-weight: bold;
     position: relative;
+    color: ${props => props.theme.color};
 
     :after {
         left: 0;
@@ -66,15 +66,15 @@ export const Title = styled.span`
         height: 3px;
         position: absolute;
         transform: scaleX(0);
-        background-color: #999999;
         transform-origin: bottom right;
         transition: transform 0.35s ease-out;
+        background-color: ${props => props.theme.color};
     }
 `
 
 export const IconCopy = styled.svg`
     width: 6%;
-    fill: #ffffff;
+    fill: ${props => props.theme.backgroundColor};
 `
 
 export const ContainerImage = styled.a`
@@ -101,9 +101,9 @@ export const Footer = styled.footer`
     align-content: center;
     justify-items: center;
     justify-content: center;
-    border: 2px solid #e5e5e5;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    border: 2px solid ${props => props.theme.secondary};
 `
 
 export const ContainerIconLike = styled.button`
@@ -119,7 +119,7 @@ interface IIconLike {
 }
 
 export const IconLike = styled.svg<IIconLike>`
-    fill: ${props => props.like ? '#E03B00' : '#999999'};
+    fill: ${props => props.like ? '#E03B00' : props.theme.color};
 
     :hover {
         transform: scale(1.08);
@@ -139,7 +139,7 @@ interface IIconMark {
 }
 
 export const IconMark = styled.svg<IIconMark>`
-    fill: ${props => props.mark ? '#5c91ed' : '#999999'};
+    fill: ${props => props.mark ? props.theme.primary : props.theme.color};
 
     :hover {
         transform: scale(1.08);
@@ -157,7 +157,7 @@ export const ContainerIconMore = styled.button`
     
     :hover {
         animation: swing 1s;
-        background-color: #e5e5e5;
+        background-color: ${props => props.theme.secondary};
     }
 
     @keyframes swing {
@@ -187,5 +187,5 @@ export const ContainerIconMore = styled.button`
 
 export const IconMore = styled.svg`
     width: 100%;
-    fill: #999999;
+    fill: ${props => props.theme.color};
 `

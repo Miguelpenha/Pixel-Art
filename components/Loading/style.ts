@@ -28,7 +28,7 @@ export const Container = styled.span<IContainer>`
         transform-origin: center center;
         animation: rotation 0.5s linear infinite;
         border: ${props => props.borderSize || 6}px solid;
-        border-color: transparent #0085FF #0085FF;
+        border-color: transparent ${props => props.theme.primary} ${props => props.theme.primary};
     }
 
     @keyframes rotation {

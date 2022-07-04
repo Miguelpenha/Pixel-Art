@@ -13,8 +13,8 @@ export const ContainerIconAdd = styled.a`
     border-radius: 50%;
 
     :hover {
-        background-color: #EBEBEB;
         animation: 0.8s zoomInZoomOutPlusContainer;
+        background-color: ${props => props.theme.secondary};
         
         svg {
             animation: 1.4s zoomInZoomOutSVG;
@@ -36,7 +36,7 @@ export const ContainerIconAdd = styled.a`
 
 export const IconAdd = styled.svg`
     width: 90%;
-    fill: #999999;
+    fill: ${props => props.theme.color};
 `
 
 export const Arts = styled.div`

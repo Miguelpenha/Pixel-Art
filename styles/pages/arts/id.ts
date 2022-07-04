@@ -30,12 +30,12 @@ export const ContainerIconOpen = styled.a`
     border-radius: 50%;
     
     :hover {
-        background-color: #ffffff47;
+        background-color: ${props => props.theme.secondary};
     }
 `
 
 export const IconOpen = styled.svg`
-    fill: #c5c5c5;
+    fill: ${props => props.theme.backgroundColorSecondary};
 `
 
 export const ArtImage = styled.img`

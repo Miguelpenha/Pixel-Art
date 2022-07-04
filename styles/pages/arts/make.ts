@@ -18,16 +18,14 @@ export const Options = styled.nav`
 export const InputName = styled.input`
     width: 90%;
     padding: 0.5%;
-    color: #4E7AC7;
     font-size: 1vw;
     font-weight: bold;
     border-radius: 6px;
-    border: 3px solid #4E7AC7;
+    color: ${props => props.theme.primary};
+    border: 3px solid ${props => props.theme.primary};
 
     :focus {
         outline: none;
-        color: #7FB2F0;
-        border-color: #7FB2F0;
         border-radius: 10px;
     }
 `
@@ -35,16 +33,14 @@ export const InputName = styled.input`
 export const InputPixelsCount = styled.input`
     width: 50%;
     padding: 0.5%;
-    color: #4E7AC7;
     font-size: 1.5vw;
     font-weight: bold;
     border-radius: 6px;
-    border: 3px solid #4E7AC7;
+    color: ${props => props.theme.primary};
+    border: 3px solid ${props => props.theme.primary};
 
     :focus {
         outline: none;
-        color: #7FB2F0;
-        border-color: #7FB2F0;
         border-radius: 10px;
     }
 `
@@ -59,16 +55,14 @@ export const ButtonEraser = styled.button<IButtonEraser>`
     cursor: pointer;
     border-radius: 50%;
     padding: ${props => props.active ? 6 : 2}%;
-    background-color: ${props => props.active ? '#bfbfbf' : 'transparent'};
-
-    svg {
-        fill: ${props => props.active ? '#7FB2F0' : '#4E7AC7'};
-    }
+    background-color: ${props => props.active ? props.theme.secondary : 'transparent'};
 
     :hover {
-        ${props => !props.active && css`
-            background-color: #d3d3d3;
-        `}
+        background-color: ${props => props.theme.secondary};
+    }
+
+    svg {
+        fill: ${props => props.theme.primary};
     }
 `
 
@@ -81,11 +75,11 @@ export const ButtonReset = styled.button`
     background-color: transparent;
 
     svg {
-        fill: #4E7AC7
+        fill: ${props => props.theme.primary}
     }
 
     :hover {
-        background-color: #d3d3d3;
+        background-color: ${props => props.theme.secondary};
     }
 `
 
@@ -98,11 +92,11 @@ export const ButtonDownload = styled.a`
     background-color: transparent;
 
     svg {
-        fill: #4E7AC7
+        fill: ${props => props.theme.primary};
     }
 
     :hover {
-        background-color: #d3d3d3;
+        background-color: ${props => props.theme.secondary};
     }
 `
 
@@ -111,7 +105,7 @@ export const InputColor = styled.input`
     cursor: pointer;
     
     ::-webkit-color-swatch {
-        border: 3px solid #4E7AC7;
+        border: 3px solid ${props => props.theme.primary};
     }
 
     ::-webkit-color-swatch-wrapper {
@@ -121,18 +115,16 @@ export const InputColor = styled.input`
 
 export const ButtonExport = styled.button`
     padding: 3%;
-    color: #4E7AC7;
     cursor: pointer;
     font-size: 1.2vw;
     font-weight: bold;
     border-radius: 10px;
-    border: 2px solid #4E7AC7;
-    background-color: #ffffff;
-
+    color: ${props => props.theme.primary};
+    border: 2px solid ${props => props.theme.primary};
+    background-color: ${props => props.theme.backgroundColor};
+    
     :hover {
-        color: #7FB2F0;
-        border-color: #7FB2F0;
-        background-color: #d3d3d3;
+        background-color: ${props => props.theme.secondary};
     }
 `
 
@@ -140,7 +132,7 @@ export const FormImport = styled.form`
     padding: 4%;
     margin-top: 5%;
     border-radius: 5px;
-    border: 2px solid #4E7AC7;
+    border: 2px solid ${props => props.theme.primary};
 `
 
 export const InputImport = styled.input`
@@ -149,36 +141,32 @@ export const InputImport = styled.input`
     padding: 0.5%;
     margin-top: 5%;
     display: block;
-    color: #4E7AC7;
     font-size: 1vw;
     font-weight: bold;
     border-radius: 6px;
-    border: 3px solid #4E7AC7;
+    color: ${props => props.theme.primary};
+    border: 3px solid ${props => props.theme.primary};
     
     :focus {
         outline: none;
-        color: #7FB2F0;
-        border-color: #7FB2F0;
         border-radius: 10px;
     }
 `
 
 export const ButtonImport = styled.button`
     padding: 3%;
-    color: #4E7AC7;
     margin-top: 10%;
     cursor: pointer;
     font-size: 1.2vw;
     margin-bottom: 5%;
     font-weight: bold;
     border-radius: 10px;
-    border: 2px solid #4E7AC7;
-    background-color: #ffffff;
+    color: ${props => props.theme.primary};
+    border: 2px solid ${props => props.theme.primary};
+    background-color: ${props => props.theme.backgroundColor};
 
     :hover {
-        color: #7FB2F0;
-        border-color: #7FB2F0;
-        background-color: #d3d3d3;
+        background-color: ${props => props.theme.secondary};
     }
 `
 
