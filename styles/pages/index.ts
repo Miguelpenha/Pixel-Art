@@ -8,9 +8,9 @@ export const ContainerIconAdd = styled.a`
     width: 6%;
     float: right;
     margin-top: 2%;
+    overflow: hidden;
     margin-right: 2%;
     border-radius: 50%;
-    overflow: hidden;
 
     :hover {
         background-color: #EBEBEB;

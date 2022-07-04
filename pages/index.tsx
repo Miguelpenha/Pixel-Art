@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { Container, ContainerIconAdd, IconAdd, Arts } from '../styles/pages'
 import Link from 'next/link'
 import Art from '../components/Art'
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
+import Loading from '../components/Loading'
 
 export default function Home() {
     const { data: arts } = api<Iart[]>('/api/arts/find')
@@ -15,17 +15,6 @@ export default function Home() {
                 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
                 <title>Pixels Arts</title>
             </Head>
-            <DropdownMenu.Root>
-                    <DropdownMenu.Trigger asChild>
-                        {/* <button>Abrir</button> */}
-                    </DropdownMenu.Trigger>
-                    <DropdownMenu.Content style={{backgroundColor: 'red', width: '100%'}}>
-                        <DropdownMenu.Label>Label</DropdownMenu.Label>
-                        <DropdownMenu.Item>…</DropdownMenu.Item>
-                        <DropdownMenu.Item>…</DropdownMenu.Item>
-                        <DropdownMenu.Item>…</DropdownMenu.Item>
-                    </DropdownMenu.Content>
-                </DropdownMenu.Root>
             <Container>
                 <Link href="/arts/make" passHref>
                     <ContainerIconAdd title="Fazer nova pixel arte">
@@ -36,7 +25,13 @@ export default function Home() {
                     </ContainerIconAdd>
                 </Link>
                 <Arts>
-                    {arts?.map((art, index) => <Art key={index} art={art}/>)}
+                    {arts ? (
+                        arts.map((art, index) => (
+                            <Art key={index} art={art}/>
+                        ))
+                    ) : (
+                        <Loading/>
+                    )}
                 </Arts>
             </Container>
         </>

@@ -40,7 +40,6 @@ export const Header = styled.header<IHeader>`
             props.colors.map((color, index) => {
                 colorsNews += `${color}${index === props.colors.length-1 ? '' : ', '}`
             })
-            console.log(colorsNews)
             
             return css`
                 background: -webkit-linear-gradient(60deg, ${colorsNews});

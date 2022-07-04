@@ -4,6 +4,7 @@
   "description": "Pixel Art",
   "main": "index.js",
   "scripts": {
+    "start": "next start",
     "dev": "next dev",
     "build": "next build"
   },
@@ -19,8 +20,6 @@
   },
   "homepage": "https://github.com/Miguelpenha/sobre-cobre#readme",
   "dependencies": {
-    "@radix-ui/react-dialog": "^0.1.7",
-    "@radix-ui/react-dropdown-menu": "^0.1.6",
     "axios": "^0.26.1",
     "chrome-aws-lambda": "^10.1.0",
     "get-image-colors": "^4.0.1",

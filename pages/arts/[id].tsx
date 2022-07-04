@@ -1,14 +1,55 @@
 import { useRouter } from 'next/router'
-import api from '../../services/api'
+import { get } from '../../services/api'
 import { Iart } from '../../types'
 import { useState } from 'react'
 import Head from 'next/head'
 import { Container, Title, ContainerArtImage, ContainerIconOpen, IconOpen, ArtImage, ModalImage, ArtModalImage } from '../../styles/pages/arts/id'
 import Link from 'next/link'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import axios from 'axios'
+import { FC } from 'react'
+import { SWRConfig } from 'swr'
 
-function Art() {
-    const { query: { id } } = useRouter()
-    const { data: art } = api<Iart>(`/api/arts/find/${id}`)
+interface Iprops {
+    id: string
+}
+
+interface Iparams {
+    id: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    const { data: arts } = await axios.get<Iart[]>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find`)
+
+    const paths = arts.map(art => ({
+        params: {
+            id: art._id
+        }
+    }))
+
+    return {
+        paths,
+        fallback: true
+    }
+}
+
+export const getStaticProps: GetStaticProps = async context => {
+    const { id } = context.params as unknown as Iparams
+
+    const { data: art } = await axios.get<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
+
+    return {
+        props: {
+            id,
+            fallback: {
+                [`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`]: art
+            }
+        }
+    }
+}
+
+const Art: FC<Iprops> = ({ id }) => {
+    const { data: art } = get<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
     const [modalImageOpen, setModalImageOpen] = useState(false)
     const [modalImageZoom, setModalImageZoom] = useState(false)
 
@@ -61,4 +102,13 @@ function Art() {
     )
 }
 
-export default Art
+export default function Page({ fallback, id }: {
+    fallback: [key: string]
+    id: string
+}) {
+    return (
+        <SWRConfig value={{fallback}}>
+            <Art id={id}/>
+        </SWRConfig>
+    )
+}
