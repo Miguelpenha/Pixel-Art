@@ -38,11 +38,13 @@ export const getStaticProps: GetStaticProps = async context => {
 
     const { data: art } = await axios.get<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
 
-    return {
-        props: {
-            id,
-            fallback: {
-                [`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`]: art
+    if (id && art) {
+        return {
+            props: {
+                id,
+                fallback: {
+                    [`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`]: art
+                }
             }
         }
     }
