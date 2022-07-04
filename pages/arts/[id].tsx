@@ -8,7 +8,6 @@ import Link from 'next/link'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import axios from 'axios'
 import { FC } from 'react'
-import { SWRConfig } from 'swr'
 
 interface Iprops {
     id: string
@@ -36,16 +35,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async context => {
     const { id } = context.params as unknown as Iparams
 
-    const { data: art } = await axios.get<Iart>(`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`)
-
-    if (id && art) {
-        return {
-            props: {
-                id,
-                fallback: {
-                    [`${process.env.NEXT_PUBLIC_DOMINIO}/api/arts/find/${id}`]: art
-                }
-            }
+    return {
+        props: {
+            id
         }
     }
 }
@@ -104,13 +96,4 @@ const Art: FC<Iprops> = ({ id }) => {
     )
 }
 
-export default function Page({ fallback, id }: {
-    fallback: [key: string]
-    id: string
-}) {
-    return (
-        <SWRConfig value={{fallback}}>
-            <Art id={id}/>
-        </SWRConfig>
-    )
-}
+export default Art
