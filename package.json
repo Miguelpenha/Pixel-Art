@@ -25,7 +25,7 @@
     "get-image-colors": "^4.0.1",
     "handlebars": "^4.7.7",
     "html2canvas": "^1.4.1",
-    "mongoose": "^6.4.2",
+    "mongoose": "^6.4.3",
     "next": "^12.2.0",
     "nookies": "^2.5.2",
     "puppeteer": "^14.4.1",
