@@ -12,7 +12,6 @@ export default function Home() {
     return (
         <>
             <Head>
-                <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
                 <title>Pixels Arts</title>
             </Head>
             <Container>
